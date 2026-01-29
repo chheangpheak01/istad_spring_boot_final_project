@@ -23,5 +23,6 @@ public record EmployeeUpdateDto(
 
         @NotBlank(message = "Position UUID is required")
         String positionUuid,
+
         AddressUpdateDto address
 ) {}

@@ -3,6 +3,7 @@ import jakarta.validation.constraints.*;
 import lombok.Builder;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Builder
 public record EmployeeCreateDto(
@@ -35,5 +36,11 @@ public record EmployeeCreateDto(
         String positionUuid,
 
         @NotNull(message = "Address details are required")
-        AddressCreateDto address
+        AddressCreateDto address,
+
+        @NotEmpty(message = "At least one project UUID is required")
+        Set<String> projectUuids,
+
+        @NotEmpty(message = "At least one documentUuids is required")
+        Set<String> documentUuids
 ) {}

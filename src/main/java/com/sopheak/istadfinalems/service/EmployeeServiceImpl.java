@@ -1,32 +1,34 @@
 package com.sopheak.istadfinalems.service;
-import com.sopheak.istadfinalems.entities.Employee;
-import com.sopheak.istadfinalems.entities.EmployeeStatus;
+import com.sopheak.istadfinalems.entities.*;
+import com.sopheak.istadfinalems.exception.DepartmentNotFoundException;
 import com.sopheak.istadfinalems.exception.EmployeeNotFoundException;
+import com.sopheak.istadfinalems.exception.JobPositionNotFoundException;
 import com.sopheak.istadfinalems.mapper.EmployeeMapStruct;
 import com.sopheak.istadfinalems.model.dto.EmployeeCreateDto;
 import com.sopheak.istadfinalems.model.dto.EmployeeResponseDto;
 import com.sopheak.istadfinalems.model.dto.EmployeeUpdateDto;
-import com.sopheak.istadfinalems.repository.EmployeeRepository;
+import com.sopheak.istadfinalems.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
 
     final EmployeeRepository employeeRepository;
     final EmployeeMapStruct employeeMapStruct;
+    final DepartmentRepository departmentRepository;
+    final JobPositionRepository jobPositionRepository;
+    final ProjectRepository projectRepository;
+    final EmployeeDocumentRepository employeeDocumentRepository;
 
     @Override
     public EmployeeResponseDto getEmployeeByUuid(String uuid) {
         Optional<Employee> employee = employeeRepository.findEmployeeByUuidAndIsDeletedIsFalse(uuid);
-        if(employee.isEmpty()){
+        if (employee.isEmpty()) {
             throw new EmployeeNotFoundException("Employee not found");
         }
         return employeeMapStruct.mapFromEmployeeToEmployeeResponseDto(employee.get());
@@ -35,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public EmployeeResponseDto getEmployeeByName(String name) {
         Optional<Employee> employee = employeeRepository.findEmployeeByNameAndIsDeletedIsFalse(name);
-        if(employee.isEmpty()){
+        if (employee.isEmpty()) {
             throw new EmployeeNotFoundException("Employee not found");
         }
         return employeeMapStruct.mapFromEmployeeToEmployeeResponseDto(employee.get());
@@ -44,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public EmployeeResponseDto getEmployeeByPhoneNumber(String phoneNumber) {
         Optional<Employee> employee = employeeRepository.findEmployeeByPhoneNumberAndIsDeletedIsFalse(phoneNumber);
-        if(employee.isEmpty()){
+        if (employee.isEmpty()) {
             throw new EmployeeNotFoundException("Employee not found");
         }
         return employeeMapStruct.mapFromEmployeeToEmployeeResponseDto(employee.get());
@@ -84,11 +86,49 @@ public class EmployeeServiceImpl implements EmployeeService{
         employee.setHireDate(employeeCreateDto.hireDate());
         employee.setIsDeleted(false);
         employee.setStatus(EmployeeStatus.ACTIVE);
-        return null;
+
+        if (employeeCreateDto.departmentUuid() != null) {
+            Department department = departmentRepository.findByUuid(employeeCreateDto.departmentUuid())
+                    .orElseThrow(() -> new DepartmentNotFoundException("Department not found with UUID: " + employeeCreateDto.departmentUuid()));
+            employee.setDepartment(department);
+        }
+
+        if (employeeCreateDto.positionUuid() != null) {
+            JobPosition jobPosition = jobPositionRepository.findByUuid(employeeCreateDto.positionUuid())
+                    .orElseThrow(() -> new JobPositionNotFoundException("JobPosition not found with UUID: " + employeeCreateDto.positionUuid()));
+            employee.setJobPosition(jobPosition);
+        }
+
+        if(employeeCreateDto.address() != null){
+
+            Address address = new Address();
+
+            address.setUuid(UUID.randomUUID().toString());
+            address.setStreet(employeeCreateDto.address().street());
+            address.setCity(employeeCreateDto.address().city());
+            address.setProvince(employeeCreateDto.address().province());
+            address.setIsDeleted(false);
+            employee.setAddress(address);
+        }
+        if (employeeCreateDto.documentUuids() != null && !employeeCreateDto.documentUuids().isEmpty()) {
+            List<EmployeeDocument> documents = employeeDocumentRepository.findAllByUuidIn(
+                    new ArrayList<>(employeeCreateDto.documentUuids())
+            );
+            employee.setDocuments(documents);
+        }
+
+        if(employeeCreateDto.projectUuids() != null && !employeeCreateDto.projectUuids().isEmpty()){
+            List<Project> projects = projectRepository.
+                    findAllByUuidIn(new ArrayList<>(employeeCreateDto.projectUuids()));
+            employee.setProjects(new HashSet<>(projects));
+        }
+        employeeRepository.save(employee);
+        return employeeMapStruct.mapFromEmployeeToEmployeeResponseDto(employee);
     }
 
     @Override
     public EmployeeResponseDto updateEmployeeByUuid(String uuid, EmployeeUpdateDto employeeUpdateDto) {
+
         return null;
     }
 
