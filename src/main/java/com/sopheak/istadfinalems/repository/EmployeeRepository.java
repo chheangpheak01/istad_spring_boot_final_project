@@ -13,7 +13,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Optional<Employee> findEmployeeByPhoneNumberAndIsDeletedIsFalse(String phoneNumber);
     Page<Employee> findAllEmployeeByIsDeletedIsFalse(Pageable pageable);
     Page<Employee> findEmployeeByNameContainingIgnoreCaseAndIsDeletedFalse(String name, Pageable pageable);
-    Boolean existsEmployeesByUuid(String uuid);
     Boolean existsEmployeesByEmail(String email);
     Boolean existsEmployeesByPhoneNumber(String phoneNumber);
 }

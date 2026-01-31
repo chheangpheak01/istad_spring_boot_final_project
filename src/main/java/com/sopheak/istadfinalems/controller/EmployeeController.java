@@ -1,5 +1,7 @@
 package com.sopheak.istadfinalems.controller;
-import com.sopheak.istadfinalems.model.dto.EmployeeCreateDto;
+import com.sopheak.istadfinalems.model.dto.employee.EmployeeCreateDto;
+import com.sopheak.istadfinalems.model.dto.employee.EmployeeResponseDto;
+import com.sopheak.istadfinalems.model.dto.employee.EmployeeUpdateDto;
 import com.sopheak.istadfinalems.service.EmployeeService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,6 @@ import java.util.Date;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-
 
     @GetMapping("/get-employee-by-uuid/{uuid}")
     public ResponseTemplate<Object> getEmployeeByUuid(@PathVariable String uuid){
@@ -96,4 +97,37 @@ public class EmployeeController {
                 .build();
     }
 
+    @PutMapping("/update-employee-by-uuid/{uuid}")
+    public ResponseTemplate<Object> updateEmployeeByUuid(@PathVariable String uuid, @RequestBody @Validated EmployeeUpdateDto employeeUpdateDto){
+        return ResponseTemplate
+                .builder()
+                .date(Date.from(Instant.now()))
+                .staus(HttpStatus.OK.toString())
+                .message("Employee has been updated successfully")
+                .data(employeeService.updateEmployeeByUuid(uuid, employeeUpdateDto))
+                .build();
+    }
+
+    @PatchMapping("/update-employee-status-by-uuid/{uuid}")
+    public ResponseTemplate<Object> updateEmployeeStatus(@PathVariable String uuid, @RequestParam String status) {
+        EmployeeResponseDto updatedEmployee = employeeService.updateEmployeeStatus(uuid, status);
+        return ResponseTemplate
+                .builder()
+                .date(Date.from(Instant.now()))
+                .staus(HttpStatus.OK.toString())
+                .message("Employee status has been updated successfully" + status.toUpperCase())
+                .data(updatedEmployee)
+                .build();
+    }
+
+    @DeleteMapping("/delete-employee-by-uuid/{uuid}")
+    public ResponseTemplate<Object> deleteEmployeeByUuid(@PathVariable String uuid) {
+        return ResponseTemplate
+                .builder()
+                .date(Date.from(Instant.now()))
+                .staus(HttpStatus.OK.toString())
+                .message(employeeService.deleteEmployeeByUuid(uuid))
+                .data(null)
+                .build();
+    }
 }

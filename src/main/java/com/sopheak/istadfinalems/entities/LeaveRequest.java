@@ -1,4 +1,5 @@
 package com.sopheak.istadfinalems.entities;
+import com.sopheak.istadfinalems.entities.emun.LeaveStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;

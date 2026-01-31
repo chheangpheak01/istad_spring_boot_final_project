@@ -12,5 +12,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+  # validate file size
+  servlet:
+    multipart:
+      max-request-size: 1MB
+      max-file-size: 1MB
+  file:
+    upload-location: D:\\Istad-Spring\\istad-final-employee-management-system-project\\uploads
+    preview-path: localhost:9090/uploads/
+    download-path: localhost:9090/
 
 

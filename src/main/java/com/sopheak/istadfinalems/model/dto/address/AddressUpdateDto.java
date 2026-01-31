@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.model.dto;
+package com.sopheak.istadfinalems.model.dto.address;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 

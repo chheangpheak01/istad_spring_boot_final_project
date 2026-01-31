@@ -1,4 +1,6 @@
 package com.sopheak.istadfinalems.entities;
+import com.sopheak.istadfinalems.entities.emun.EmployeeStatus;
+import com.sopheak.istadfinalems.entities.emun.GenderStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,6 +26,8 @@ public class Employee {
     private Integer id;
     @Column(unique = true, nullable = false, updatable = false)
     private String uuid;
+    @Column(unique = true, length = 50)
+    private String employeeId;
 
     @Column(length = 200, nullable = false)
     private String name;
@@ -33,6 +37,15 @@ public class Employee {
     private String password;
     @Column(length = 200, nullable = false)
     private String phoneNumber;
+    @Column(length = 255)
+    private String profileImage;
+    @Column(nullable = false)
+    private LocalDate dob;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private GenderStatus gender;
+    @Column(columnDefinition = "TEXT")
+    private String biography;
     @Column(nullable = false)
     private BigDecimal salary;
     @Column(nullable = false)

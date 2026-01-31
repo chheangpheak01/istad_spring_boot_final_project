@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.entities;
+package com.sopheak.istadfinalems.entities.emun;
 
 public enum LeaveStatus {
     PENDING,
