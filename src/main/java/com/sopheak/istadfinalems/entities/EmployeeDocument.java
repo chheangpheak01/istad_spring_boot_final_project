@@ -16,8 +16,11 @@ public class EmployeeDocument {
     @Column(unique = true, nullable = false, updatable = false)
     private String uuid;
 
+    @Column(nullable = false)
     private String documentName;
+    @Column(nullable = false)
     private String documentType;
+    @Column(nullable = false)
     private String downloadUrl;
 
     @ManyToOne

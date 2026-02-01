@@ -26,7 +26,7 @@ public class Employee {
     private Integer id;
     @Column(unique = true, nullable = false, updatable = false)
     private String uuid;
-    @Column(unique = true, length = 50)
+    @Column(unique = true, length = 50, nullable = false)
     private String employeeId;
 
     @Column(length = 200, nullable = false)
@@ -37,14 +37,14 @@ public class Employee {
     private String password;
     @Column(length = 200, nullable = false)
     private String phoneNumber;
-    @Column(length = 255)
+    @Column(length = 300, nullable = false)
     private String profileImage;
     @Column(nullable = false)
     private LocalDate dob;
     @Enumerated(EnumType.STRING)
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private GenderStatus gender;
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String biography;
     @Column(nullable = false)
     private BigDecimal salary;
@@ -54,6 +54,7 @@ public class Employee {
     private Boolean isDeleted;
 
     @Enumerated(EnumType.STRING)
+    @Column(length = 30, nullable = false)
     private EmployeeStatus status;
 
     @Column(updatable = false)

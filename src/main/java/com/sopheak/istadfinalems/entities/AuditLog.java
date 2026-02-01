@@ -17,12 +17,14 @@ public class AuditLog {
     @Column(unique = true, nullable = false, updatable = false)
     private String uuid;
 
+    @Column(nullable = false)
     private String entityId;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AuditAction action;
     @Column(nullable = false)
     private String entityName;
+    @Column(nullable = false)
     private String performedBy;
     @Column(nullable = false)
     private Boolean isDeleted;

@@ -80,7 +80,7 @@ public class FileServiceImpl implements FileService{
         try {
             Path filePath = Paths.get(fileUploadLocation).resolve(fileName);
             if (!Files.exists(filePath)) {
-                throw new RuntimeException("Delete failed: File '" + fileName + "' not found on the server.");
+                throw new RuntimeException("Delete failed: File " + fileName + " not found on the server.");
             }
             return Files.deleteIfExists(filePath);
         } catch (Exception e) {

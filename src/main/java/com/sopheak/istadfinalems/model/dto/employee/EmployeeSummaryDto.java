@@ -6,5 +6,6 @@ public record EmployeeSummaryDto(
         String uuid,
         String name,
         String positionName,
-        String status
+        String status,
+        String profileImage
 ) {}

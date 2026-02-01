@@ -15,10 +15,13 @@ public class Address {
     private Integer id;
     @Column(unique = true, nullable = false, updatable = false)
     private String uuid;
-
+    @Column(nullable = false)
     private String street;
+    @Column(nullable = false)
     private String city;
+    @Column(nullable = false)
     private String province;
+    @Column(nullable = false)
     private String country;
     @Column(nullable = false)
     private Boolean isDeleted;

@@ -21,7 +21,9 @@ public class JobPosition {
 
     @Column(nullable = false, unique = true)
     private String title;
+    @Column(nullable = false)
     private BigDecimal minSalary;
+    @Column(nullable = false)
     private BigDecimal maxSalary;
     @Column(nullable = false)
     private Boolean isDeleted;

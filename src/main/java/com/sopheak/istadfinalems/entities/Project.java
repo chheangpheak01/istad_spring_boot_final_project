@@ -20,6 +20,7 @@ public class Project {
 
     @Column(nullable = false, unique = true)
     private String projectName;
+    @Column(nullable = false)
     private String description;
     @Column(nullable = false)
     private Boolean isDeleted;
