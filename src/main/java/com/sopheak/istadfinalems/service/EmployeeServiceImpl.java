@@ -1,5 +1,6 @@
 package com.sopheak.istadfinalems.service;
 import com.sopheak.istadfinalems.entities.*;
+import com.sopheak.istadfinalems.entities.emun.AuditAction;
 import com.sopheak.istadfinalems.entities.emun.EmployeeStatus;
 import com.sopheak.istadfinalems.entities.emun.GenderStatus;
 import com.sopheak.istadfinalems.exception.DepartmentNotFoundException;
@@ -20,12 +21,13 @@ import java.util.*;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
-    final EmployeeRepository employeeRepository;
-    final EmployeeMapStruct employeeMapStruct;
-    final DepartmentRepository departmentRepository;
-    final JobPositionRepository jobPositionRepository;
-    final ProjectRepository projectRepository;
-    final EmployeeDocumentRepository employeeDocumentRepository;
+    final private EmployeeRepository employeeRepository;
+    final private EmployeeMapStruct employeeMapStruct;
+    final private DepartmentRepository departmentRepository;
+    final private JobPositionRepository jobPositionRepository;
+    final private ProjectRepository projectRepository;
+    final private EmployeeDocumentRepository employeeDocumentRepository;
+    final private AuditService auditService;
 
     @Override
     public EmployeeResponseDto getEmployeeByUuid(String uuid) {
@@ -122,7 +124,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         if (employeeCreateDto.positionUuid() != null) {
-            JobPosition jobPosition = jobPositionRepository.findByUuid(employeeCreateDto.positionUuid())
+            JobPosition jobPosition = jobPositionRepository.findByUuidAndIsDeletedFalse(employeeCreateDto.positionUuid())
                     .orElseThrow(() -> new JobPositionNotFoundException("JobPosition not found with UUID: " + employeeCreateDto.positionUuid()));
             employee.setJobPosition(jobPosition);
         }
@@ -158,6 +160,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setProjects(new HashSet<>(projects));
         }
         employeeRepository.save(employee);
+        auditService.log(
+                "Employee",
+                employee.getId().toString(),
+                AuditAction.CREATE,
+                "Created employee: " + employee.getName() + " with ID: " + employee.getEmployeeId()
+        );
         return employeeMapStruct.mapFromEmployeeToEmployeeResponseDto(employee);
     }
 
@@ -198,7 +206,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         if (employeeUpdateDto.positionUuid() != null) {
-            JobPosition jobPosition = jobPositionRepository.findByUuid(employeeUpdateDto.positionUuid())
+            JobPosition jobPosition = jobPositionRepository.findByUuidAndIsDeletedFalse(employeeUpdateDto.positionUuid())
                     .orElseThrow(() -> new JobPositionNotFoundException("JobPosition not found with UUID: " + employeeUpdateDto.positionUuid()));
             employee.get().setJobPosition(jobPosition);
         }
@@ -246,6 +254,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.get().setProjects(new HashSet<>(projects));
         }
         employeeRepository.save(employee.get());
+        auditService.log(
+                "Employee",
+                employee.get().getId().toString(),
+                AuditAction.UPDATE,
+                "Updated profile/status for employee: " + employee.get().getName()
+        );
         return employeeMapStruct.mapFromEmployeeToEmployeeResponseDto(employee.get());
     }
 
@@ -270,6 +284,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setIsDeleted(true);
         employee.setStatus(EmployeeStatus.TERMINATED);
         employeeRepository.save(employee);
+        auditService.log(
+                "Employee",
+                employee.getId().toString(),
+                AuditAction.DELETE,
+                "Terminated and soft-deleted employee: " + employee.getName()
+        );
         return "Employee with UUID " + uuid + " has been deleted successfully";
     }
 }

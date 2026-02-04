@@ -96,6 +96,19 @@ public class GlobalExceptionHandler {
                 .body(aipErrorResponse);
     }
 
+    @ExceptionHandler(EmployeeDocumentNotFoundException.class)
+    public ResponseEntity<AIPErrorResponse> EmployeeDocumentNotFoundException(EmployeeDocumentNotFoundException e){
+        AIPErrorResponse aipErrorResponse = AIPErrorResponse
+                .builder()
+                .status(HttpStatus.NOT_FOUND.toString())
+                .timeStamp(LocalDateTime.now())
+                .errorMessage(e.getMessage())
+                .build();
+        return  ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(aipErrorResponse);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<AIPErrorResponse> handleValidationException(MethodArgumentNotValidException e) {
         String detailedMessage = e.getBindingResult().getFieldErrors().stream()

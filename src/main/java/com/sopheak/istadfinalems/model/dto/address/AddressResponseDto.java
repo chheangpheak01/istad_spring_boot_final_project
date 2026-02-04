@@ -3,6 +3,7 @@ import lombok.Builder;
 
 @Builder
 public record AddressResponseDto(
+        String uuid,
         String street,
         String city,
         String province,

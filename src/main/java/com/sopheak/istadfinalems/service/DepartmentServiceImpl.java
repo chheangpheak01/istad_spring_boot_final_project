@@ -1,6 +1,7 @@
 package com.sopheak.istadfinalems.service;
 import com.sopheak.istadfinalems.entities.Department;
 import com.sopheak.istadfinalems.entities.Employee;
+import com.sopheak.istadfinalems.entities.emun.AuditAction;
 import com.sopheak.istadfinalems.exception.DepartmentNotFoundException;
 import com.sopheak.istadfinalems.mapper.DepartmentMapStruct;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentCreateDto;
@@ -25,6 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService{
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapStruct departmentMapStruct;
     private final EmployeeRepository employeeRepository;
+    private final AuditService auditService;
 
     @Override
     public DepartmentResponseDto getDepartmentByUuid(String uuid) {
@@ -82,6 +84,12 @@ public class DepartmentServiceImpl implements DepartmentService{
                 employeeRepository.save(employee);
             }
         }
+        auditService.log(
+                "Department",
+                savedDepartment.getId().toString(),
+                AuditAction.CREATE,
+                "Created department: " + savedDepartment.getName()
+        );
         return departmentMapStruct.mapFromDepartmentToDepartmentResponseDto(savedDepartment);
     }
 
@@ -111,6 +119,12 @@ public class DepartmentServiceImpl implements DepartmentService{
                 employeeRepository.save(employee);
             }
         }
+        auditService.log(
+                "Department",
+                department.getId().toString(),
+                AuditAction.UPDATE,
+                "Updated department details for: " + department.getName()
+        );
         return departmentMapStruct.mapFromDepartmentToDepartmentResponseDto(departmentRepository.save(department));
     }
 
@@ -120,6 +134,12 @@ public class DepartmentServiceImpl implements DepartmentService{
                 .orElseThrow(() -> new DepartmentNotFoundException("Department not found with UUID: " + uuid));
         department.setIsDeleted(true);
         departmentRepository.save(department);
+        auditService.log(
+                "Department",
+                department.getId().toString(),
+                AuditAction.DELETE,
+                "Soft deleted department: " + department.getName()
+        );
         return "Department with UUID " + uuid + " has been deleted successfully";
     }
 }

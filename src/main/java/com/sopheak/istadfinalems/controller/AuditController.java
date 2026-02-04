@@ -1,0 +1,22 @@
+package com.sopheak.istadfinalems.controller;
+import com.sopheak.istadfinalems.entities.AuditLog;
+import com.sopheak.istadfinalems.repository.AuditLogRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1")
+@RequiredArgsConstructor
+public class AuditController {
+
+    private final AuditLogRepository auditLogRepository;
+
+    @GetMapping("/audit-logs")
+    public Page<AuditLog> getLogs(Pageable pageable) {
+        return auditLogRepository.findAllByOrderByTimestampDesc(pageable);
+    }
+}

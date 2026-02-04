@@ -1,5 +1,6 @@
 package com.sopheak.istadfinalems.model.dto.address;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 @Builder
@@ -11,5 +12,7 @@ public record AddressUpdateDto(
         @NotBlank(message = "province is required if updating")
         String province,
         @NotBlank(message = "Country is required if updating")
-        String country
+        String country,
+        @NotNull(message = "IsDeleted status must be specified")
+        Boolean isDeleted
 ) {}

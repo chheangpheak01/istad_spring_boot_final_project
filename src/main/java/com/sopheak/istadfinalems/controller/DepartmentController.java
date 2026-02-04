@@ -73,6 +73,7 @@ public class DepartmentController {
                 .data(departmentService.updateDepartmentByUuid(uuid, departmentUpdateDto))
                 .build();
     }
+
     @DeleteMapping("/delete-department-by-uuid/{uuid}")
     public ResponseTemplate<Object> deleteDepartmentByUuid(@PathVariable String uuid){
         return ResponseTemplate
