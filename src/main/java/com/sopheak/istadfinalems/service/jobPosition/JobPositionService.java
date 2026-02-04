@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.jobPosition;
 import com.sopheak.istadfinalems.model.dto.job_positon.JobPositionCreateDto;
 import com.sopheak.istadfinalems.model.dto.job_positon.JobPositionResponseDto;
 import com.sopheak.istadfinalems.model.dto.job_positon.JobPositionUpdateDto;

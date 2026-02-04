@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.department;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentCreateDto;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentResponseDto;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentUpdateDto;

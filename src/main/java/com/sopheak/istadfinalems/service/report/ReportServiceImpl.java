@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.report;
 import com.sopheak.istadfinalems.entities.Employee;
 import com.sopheak.istadfinalems.entities.emun.EmployeeStatus;
 import com.sopheak.istadfinalems.entities.report_exporting.CsvGenerator;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ReportServiceImpl implements ReportService{
+public class ReportServiceImpl implements ReportService {
 
     private final EmployeeRepository employeeRepository;
 

@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.department;
 import com.sopheak.istadfinalems.entities.Department;
 import com.sopheak.istadfinalems.entities.Employee;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
@@ -9,6 +9,7 @@ import com.sopheak.istadfinalems.model.dto.department.DepartmentResponseDto;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentUpdateDto;
 import com.sopheak.istadfinalems.repository.DepartmentRepository;
 import com.sopheak.istadfinalems.repository.EmployeeRepository;
+import com.sopheak.istadfinalems.service.audit.AuditService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class DepartmentServiceImpl implements DepartmentService{
+public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapStruct departmentMapStruct;

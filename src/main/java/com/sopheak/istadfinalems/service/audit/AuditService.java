@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.audit;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
 import org.springframework.stereotype.Service;
 

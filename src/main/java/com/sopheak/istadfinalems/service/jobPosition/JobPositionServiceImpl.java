@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.jobPosition;
 import com.sopheak.istadfinalems.entities.Employee;
 import com.sopheak.istadfinalems.entities.JobPosition;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
@@ -10,6 +10,7 @@ import com.sopheak.istadfinalems.model.dto.job_positon.JobPositionResponseDto;
 import com.sopheak.istadfinalems.model.dto.job_positon.JobPositionUpdateDto;
 import com.sopheak.istadfinalems.repository.EmployeeRepository;
 import com.sopheak.istadfinalems.repository.JobPositionRepository;
+import com.sopheak.istadfinalems.service.audit.AuditService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

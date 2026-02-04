@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.address;
 import com.sopheak.istadfinalems.model.dto.address.AddressCreateDto;
 import com.sopheak.istadfinalems.model.dto.address.AddressResponseDto;
 import com.sopheak.istadfinalems.model.dto.address.AddressUpdateDto;

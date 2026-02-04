@@ -26,4 +26,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     List<Employee> findEmployeeByDepartmentName(String departmentName);
     List<Employee> findEmployeeByJobPositionTitle(String jobTitle);
     List<Employee> findEmployeeByStatus(EmployeeStatus status);
+    List<Employee> findAllByUuidIn(List<String> uuids);
 }

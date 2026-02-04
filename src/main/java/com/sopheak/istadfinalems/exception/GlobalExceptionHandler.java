@@ -109,6 +109,19 @@ public class GlobalExceptionHandler {
                 .body(aipErrorResponse);
     }
 
+    @ExceptionHandler(LeaveRequestNotFoundException.class)
+    public ResponseEntity<AIPErrorResponse> LeaveRequestNotFoundException(LeaveRequestNotFoundException e){
+        AIPErrorResponse aipErrorResponse = AIPErrorResponse
+                .builder()
+                .status(HttpStatus.NOT_FOUND.toString())
+                .timeStamp(LocalDateTime.now())
+                .errorMessage(e.getMessage())
+                .build();
+        return  ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(aipErrorResponse);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<AIPErrorResponse> handleValidationException(MethodArgumentNotValidException e) {
         String detailedMessage = e.getBindingResult().getFieldErrors().stream()

@@ -2,7 +2,7 @@ package com.sopheak.istadfinalems.controller;
 import com.sopheak.istadfinalems.model.dto.employee.EmployeeCreateDto;
 import com.sopheak.istadfinalems.model.dto.employee.EmployeeResponseDto;
 import com.sopheak.istadfinalems.model.dto.employee.EmployeeUpdateDto;
-import com.sopheak.istadfinalems.service.EmployeeService;
+import com.sopheak.istadfinalems.service.employee.EmployeeService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

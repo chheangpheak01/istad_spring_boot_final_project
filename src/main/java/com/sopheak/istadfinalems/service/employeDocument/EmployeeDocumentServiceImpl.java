@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.employeDocument;
 import com.sopheak.istadfinalems.entities.Employee;
 import com.sopheak.istadfinalems.entities.EmployeeDocument;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
@@ -10,6 +10,7 @@ import com.sopheak.istadfinalems.model.dto.employee_document.EmployeeDocumentRes
 import com.sopheak.istadfinalems.model.dto.employee_document.EmployeeDocumentUpdateDto;
 import com.sopheak.istadfinalems.repository.EmployeeDocumentRepository;
 import com.sopheak.istadfinalems.repository.EmployeeRepository;
+import com.sopheak.istadfinalems.service.audit.AuditService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeDocumentServiceImpl implements EmployeeDocumentService{
+public class EmployeeDocumentServiceImpl implements EmployeeDocumentService {
 
     private final EmployeeDocumentRepository employeeDocumentRepository;
     private final EmployeeDocumentMapStruct employeeDocumentMapStruct;

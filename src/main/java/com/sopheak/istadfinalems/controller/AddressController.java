@@ -1,7 +1,7 @@
 package com.sopheak.istadfinalems.controller;
 import com.sopheak.istadfinalems.model.dto.address.AddressCreateDto;
 import com.sopheak.istadfinalems.model.dto.address.AddressUpdateDto;
-import com.sopheak.istadfinalems.service.AddressService;
+import com.sopheak.istadfinalems.service.address.AddressService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

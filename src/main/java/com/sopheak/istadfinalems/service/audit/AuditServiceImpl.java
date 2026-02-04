@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service;
+package com.sopheak.istadfinalems.service.audit;
 import com.sopheak.istadfinalems.entities.AuditLog;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
 import com.sopheak.istadfinalems.repository.AuditLogRepository;
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class AuditServiceImpl implements AuditService{
+public class AuditServiceImpl implements AuditService {
 
     final private AuditLogRepository auditLogRepository;
 
