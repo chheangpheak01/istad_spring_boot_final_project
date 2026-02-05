@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/audits")
 @RequiredArgsConstructor
 public class AuditController {
 
     private final AuditLogRepository auditLogRepository;
 
-    @GetMapping("/audit-logs")
+    @GetMapping
     public Page<AuditLog> getLogs(Pageable pageable) {
         return auditLogRepository.findAllByOrderByTimestampDesc(pageable);
     }

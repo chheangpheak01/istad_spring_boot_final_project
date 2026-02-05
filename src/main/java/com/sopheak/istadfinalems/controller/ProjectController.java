@@ -13,12 +13,12 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/project")
+@RequestMapping("/api/v1/projects")
 public class ProjectController {
 
     private final ProjectService projectService;
 
-    @GetMapping("/get-project-by-uuid/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseTemplate<Object> getProjectByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -29,7 +29,7 @@ public class ProjectController {
                 .build();
     }
 
-    @GetMapping("/get-project-by-pagination/pagination")
+    @GetMapping("/pagination")
     public ResponseTemplate<Object> getAllProjectsByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -40,7 +40,7 @@ public class ProjectController {
                 .build();
     }
 
-    @PostMapping("/create-project")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createProject(@RequestBody @Validated ProjectCreateDto createDto){
         return ResponseTemplate
@@ -52,7 +52,7 @@ public class ProjectController {
                 .build();
     }
 
-    @PutMapping("/update-project-by-uuid/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseTemplate<Object> updateProjectByUuid(@PathVariable String uuid, @RequestBody @Validated ProjectUpdateDto updateDto){
         return ResponseTemplate
                 .builder()
@@ -63,7 +63,7 @@ public class ProjectController {
                 .build();
     }
 
-    @DeleteMapping("/delete-project-by-uuid/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseTemplate<Object> deleteProjectByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()

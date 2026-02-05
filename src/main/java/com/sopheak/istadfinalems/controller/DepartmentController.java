@@ -13,12 +13,12 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/department")
+@RequestMapping("/api/v1/departments")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
 
-    @GetMapping("/get-department-by-uuid/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseTemplate<Object> getDepartmentByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -29,7 +29,7 @@ public class DepartmentController {
                 .build();
     }
 
-    @GetMapping("/get-department-by-name/{name}")
+    @GetMapping("/name/{name}")
     public ResponseTemplate<Object> getDepartmentByName(@PathVariable String name){
         return ResponseTemplate
                 .builder()
@@ -40,7 +40,7 @@ public class DepartmentController {
                 .build();
     }
 
-    @GetMapping("/get-department-by-pagination/pagination")
+    @GetMapping("/pagination")
     public ResponseTemplate<Object> getAllDepartmentsByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -51,7 +51,7 @@ public class DepartmentController {
                 .build();
     }
 
-    @PostMapping("/create-department")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createDepartment(@RequestBody @Validated DepartmentCreateDto departmentCreateDto){
         return ResponseTemplate
@@ -63,7 +63,7 @@ public class DepartmentController {
                 .build();
     }
 
-    @PutMapping("/update-department-by-uuid/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseTemplate<Object> updateDepartmentByUuid(@PathVariable String uuid, @RequestBody @Validated DepartmentUpdateDto departmentUpdateDto){
         return ResponseTemplate
                 .builder()
@@ -74,7 +74,7 @@ public class DepartmentController {
                 .build();
     }
 
-    @DeleteMapping("/delete-department-by-uuid/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseTemplate<Object> deleteDepartmentByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()

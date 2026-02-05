@@ -14,12 +14,12 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/employee")
+@RequestMapping("/api/v1/employees")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("/get-employee-by-uuid/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseTemplate<Object> getEmployeeByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -30,7 +30,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @GetMapping("/get-employee-by-name/{name}")
+    @GetMapping("/name/{name}")
     public ResponseTemplate<Object> getEmployeeByName(@PathVariable String name){
         return ResponseTemplate
                 .builder()
@@ -41,7 +41,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @GetMapping("/get-employee-by-phoneNumber/{phoneNumber}")
+    @GetMapping("/phoneNumber/{phoneNumber}")
     public ResponseTemplate<Object> getEmployeeByPhoneNumber(@PathVariable String phoneNumber){
         return ResponseTemplate
                 .builder()
@@ -52,7 +52,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @GetMapping("/get-employee-by-pagination/pagination")
+    @GetMapping("/pagination")
     public ResponseTemplate<Object> getAllEmployeesByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -63,7 +63,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @GetMapping("/get-employee-by-name-searching")
+    @GetMapping("/search")
     public ResponseTemplate<Object> getAllEmployeesBySearchingNamePagination(@RequestParam String searchingName, Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -74,7 +74,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @GetMapping("/get-all-employees")
+    @GetMapping
     public ResponseTemplate<Object> getAllEmployees(){
         return ResponseTemplate
                 .builder()
@@ -85,7 +85,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @PostMapping("/create-employee")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createEmployee(@RequestBody @Validated EmployeeCreateDto employeeCreateDto){
         return ResponseTemplate
@@ -97,7 +97,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @PutMapping("/update-employee-by-uuid/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseTemplate<Object> updateEmployeeByUuid(@PathVariable String uuid, @RequestBody @Validated EmployeeUpdateDto employeeUpdateDto){
         return ResponseTemplate
                 .builder()
@@ -108,7 +108,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @PatchMapping("/update-employee-status-by-uuid/{uuid}")
+    @PatchMapping("/{uuid}")
     public ResponseTemplate<Object> updateEmployeeStatus(@PathVariable String uuid, @RequestParam String status) {
         EmployeeResponseDto updatedEmployee = employeeService.updateEmployeeStatus(uuid, status);
         return ResponseTemplate
@@ -120,7 +120,7 @@ public class EmployeeController {
                 .build();
     }
 
-    @DeleteMapping("/delete-employee-by-uuid/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseTemplate<Object> deleteEmployeeByUuid(@PathVariable String uuid) {
         return ResponseTemplate
                 .builder()

@@ -18,12 +18,12 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/report")
+@RequestMapping("/api/v1/reports")
 public class ReportController {
 
     private final ReportService reportService;
 
-    @GetMapping("/employees/excel")
+    @GetMapping("/excel")
     public ResponseEntity<?> downloadEmployeeExcel(
             @RequestParam(required = false) String department,
             @RequestParam(required = false) String title,
@@ -39,7 +39,7 @@ public class ReportController {
                 .body(new InputStreamResource(bis));
     }
 
-    @GetMapping("/employees/pdf")
+    @GetMapping("/pdf")
     public ResponseEntity<?> downloadEmployeePdf(
             @RequestParam(required = false) String department,
             @RequestParam(required = false) String title,
@@ -55,7 +55,7 @@ public class ReportController {
                 .body(new InputStreamResource(bis));
     }
 
-    @GetMapping("/employees/csv")
+    @GetMapping("/csv")
     public ResponseEntity<?> downloadEmployeeCsv(
             @RequestParam(required = false) String department,
             @RequestParam(required = false) String title,

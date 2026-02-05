@@ -13,12 +13,12 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/leaveRequest")
+@RequestMapping("/api/v1/leave-requests")
 public class LeaveRequestController {
 
     private final LeaveRequestService leaveRequestService;
 
-    @GetMapping("/get-leaveRequest-by-uuid/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseTemplate<Object> getLeaveRequestByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -29,7 +29,7 @@ public class LeaveRequestController {
                 .build();
     }
 
-    @GetMapping("/get-leaveRequest-by-pagination/pagination")
+    @GetMapping("/pagination")
     public ResponseTemplate<Object> getAllLeaveRequestByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -40,7 +40,7 @@ public class LeaveRequestController {
                 .build();
     }
 
-    @PostMapping("/create-leaveRequest")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createLeaveRequest(@RequestBody @Validated LeaveRequestCreateDto createDto){
         return ResponseTemplate
@@ -52,7 +52,7 @@ public class LeaveRequestController {
                 .build();
     }
 
-    @PutMapping("/update-leaveRequest-by-uuid/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseTemplate<Object> updateLeaveRequestByUuid(@PathVariable String uuid, @RequestBody @Validated LeaveRequestUpdateDto updateDto){
         return ResponseTemplate
                 .builder()
@@ -63,7 +63,7 @@ public class LeaveRequestController {
                 .build();
     }
 
-    @DeleteMapping("/delete-leaveRequest-by-uuid/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseTemplate<Object> deleteLeaveRequestByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()

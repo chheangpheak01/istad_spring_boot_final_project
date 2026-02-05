@@ -13,12 +13,12 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/employeeDocument")
+@RequestMapping("/api/v1/employee-documents")
 public class EmployeeDocumentController {
 
     private final EmployeeDocumentService employeeDocumentService;
 
-    @GetMapping("/get-employeeDocument-by-uuid/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseTemplate<Object> findDocumentByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -29,7 +29,7 @@ public class EmployeeDocumentController {
                 .build();
     }
 
-    @GetMapping("/get-employeeDocument-by-employeeId/{uuid}")
+    @GetMapping("/employee/{uuid}")
     public ResponseTemplate<Object> findDocumentsByEmployeeUuid(@PathVariable String uuid) {
         return ResponseTemplate.builder()
                 .date(Date.from(Instant.now()))
@@ -39,7 +39,7 @@ public class EmployeeDocumentController {
                 .build();
     }
 
-    @GetMapping("/get-employeeDocument-by-pagination/pagination")
+    @GetMapping("/pagination")
     public ResponseTemplate<Object> findAllDocuments(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -50,7 +50,7 @@ public class EmployeeDocumentController {
                 .build();
     }
 
-    @PostMapping("/create-employeeDocument")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createDocument(@RequestBody @Validated EmployeeDocumentCreateDto createDto){
         return ResponseTemplate
@@ -62,7 +62,7 @@ public class EmployeeDocumentController {
                 .build();
     }
 
-    @PutMapping("/update-employeeDocument-by-uuid/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseTemplate<Object> updateDocumentByUuid(@PathVariable String uuid, @RequestBody @Validated EmployeeDocumentUpdateDto updateDto){
         return ResponseTemplate
                 .builder()
@@ -73,7 +73,7 @@ public class EmployeeDocumentController {
                 .build();
     }
 
-    @DeleteMapping("/delete-employeeDocument-by-uuid/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseTemplate<Object> deleteDocumentByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()

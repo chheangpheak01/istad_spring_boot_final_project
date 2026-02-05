@@ -18,7 +18,7 @@ public class AddressController {
 
     private final AddressService addressService;
 
-    @GetMapping("/get-address-by-uuid/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseTemplate<Object> getAddressByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -29,7 +29,7 @@ public class AddressController {
                 .build();
     }
 
-    @GetMapping("/get-address-by-pagination/pagination")
+    @GetMapping("/pagination")
     public ResponseTemplate<Object> getAllAddressByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -40,7 +40,7 @@ public class AddressController {
                 .build();
     }
 
-    @PostMapping("/create-address")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createAddress(@RequestBody @Validated AddressCreateDto addressCreateDto){
         return ResponseTemplate
@@ -52,7 +52,7 @@ public class AddressController {
                 .build();
     }
 
-    @PutMapping("/update-address-by-uuid/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseTemplate<Object> updateAddressByUuid(@PathVariable String uuid, @RequestBody @Validated AddressUpdateDto addressUpdateDto){
         return ResponseTemplate
                 .builder()
@@ -63,7 +63,7 @@ public class AddressController {
                 .build();
     }
 
-    @DeleteMapping("/delete-address-by-uuid/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseTemplate<Object> deleteAddressByUuid(@PathVariable String uuid) {
         return ResponseTemplate
                 .builder()

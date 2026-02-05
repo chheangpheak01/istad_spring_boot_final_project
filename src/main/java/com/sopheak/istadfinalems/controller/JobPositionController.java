@@ -13,12 +13,12 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/jobPositon")
+@RequestMapping("/api/v1/job-positions")
 public class JobPositionController {
 
     private final JobPositionService jobPositionService;
 
-    @GetMapping("/get-jobPosition-by-uuid/{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseTemplate<Object> getJobPositionByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -29,7 +29,7 @@ public class JobPositionController {
                 .build();
     }
 
-    @GetMapping("/get-jobPosition-by-title/{title}")
+    @GetMapping("/title/{title}")
     public ResponseTemplate<Object> getJobPositionByTitle(@PathVariable String title){
         return ResponseTemplate
                 .builder()
@@ -40,7 +40,7 @@ public class JobPositionController {
                 .build();
     }
 
-    @GetMapping("/get-jobPosition-by-pagination/pagination")
+    @GetMapping("/pagination")
     public ResponseTemplate<Object> getAllJobPositionByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -51,7 +51,7 @@ public class JobPositionController {
                 .build();
     }
 
-    @PostMapping("/create-jobPositon")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createJobPosition(@RequestBody @Validated JobPositionCreateDto createDto){
         return ResponseTemplate
@@ -63,7 +63,7 @@ public class JobPositionController {
                 .build();
     }
 
-    @PutMapping("/update-jobPosition-by-uuid/{uuid}")
+    @PutMapping("/{uuid}")
     public ResponseTemplate<Object> updateJobPositonByUuid(@PathVariable String uuid, @RequestBody @Validated JobPositionUpdateDto updateDto){
         return ResponseTemplate
                 .builder()
@@ -74,7 +74,7 @@ public class JobPositionController {
                 .build();
     }
 
-    @DeleteMapping("/delete-jobPosition-by-uuid/{uuid}")
+    @DeleteMapping("/{uuid}")
     public ResponseTemplate<Object> deleteJobPositionByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
