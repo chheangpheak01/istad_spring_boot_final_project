@@ -1,7 +1,8 @@
-package com.sopheak.istadfinalems.service.audit;
+package com.sopheak.istadfinalems.service.impl;
 import com.sopheak.istadfinalems.entities.AuditLog;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
 import com.sopheak.istadfinalems.repository.AuditLogRepository;
+import com.sopheak.istadfinalems.service.AuditService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.media;
+package com.sopheak.istadfinalems.model.dto.media;
 import lombok.Builder;
 
 @Builder

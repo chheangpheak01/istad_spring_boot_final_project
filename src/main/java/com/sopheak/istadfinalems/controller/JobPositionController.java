@@ -1,7 +1,7 @@
 package com.sopheak.istadfinalems.controller;
 import com.sopheak.istadfinalems.model.dto.job_positon.JobPositionCreateDto;
 import com.sopheak.istadfinalems.model.dto.job_positon.JobPositionUpdateDto;
-import com.sopheak.istadfinalems.service.jobPosition.JobPositionService;
+import com.sopheak.istadfinalems.service.JobPositionService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

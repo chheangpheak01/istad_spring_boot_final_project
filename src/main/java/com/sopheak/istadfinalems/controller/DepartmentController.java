@@ -1,7 +1,7 @@
 package com.sopheak.istadfinalems.controller;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentCreateDto;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentUpdateDto;
-import com.sopheak.istadfinalems.service.department.DepartmentService;
+import com.sopheak.istadfinalems.service.DepartmentService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

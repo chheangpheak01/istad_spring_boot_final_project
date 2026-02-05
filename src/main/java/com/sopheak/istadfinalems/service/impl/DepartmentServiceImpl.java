@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service.department;
+package com.sopheak.istadfinalems.service.impl;
 import com.sopheak.istadfinalems.entities.Department;
 import com.sopheak.istadfinalems.entities.Employee;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
@@ -9,7 +9,8 @@ import com.sopheak.istadfinalems.model.dto.department.DepartmentResponseDto;
 import com.sopheak.istadfinalems.model.dto.department.DepartmentUpdateDto;
 import com.sopheak.istadfinalems.repository.DepartmentRepository;
 import com.sopheak.istadfinalems.repository.EmployeeRepository;
-import com.sopheak.istadfinalems.service.audit.AuditService;
+import com.sopheak.istadfinalems.service.AuditService;
+import com.sopheak.istadfinalems.service.DepartmentService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

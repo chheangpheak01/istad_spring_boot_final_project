@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service.project;
+package com.sopheak.istadfinalems.service;
 import com.sopheak.istadfinalems.model.dto.project.ProjectCreateDto;
 import com.sopheak.istadfinalems.model.dto.project.ProjectResponseDto;
 import com.sopheak.istadfinalems.model.dto.project.ProjectUpdateDto;

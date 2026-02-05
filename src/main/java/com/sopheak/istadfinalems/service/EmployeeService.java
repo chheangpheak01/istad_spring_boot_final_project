@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service.employee;
+package com.sopheak.istadfinalems.service;
 import com.sopheak.istadfinalems.model.dto.employee.EmployeeCreateDto;
 import com.sopheak.istadfinalems.model.dto.employee.EmployeeResponseDto;
 import com.sopheak.istadfinalems.model.dto.employee.EmployeeUpdateDto;

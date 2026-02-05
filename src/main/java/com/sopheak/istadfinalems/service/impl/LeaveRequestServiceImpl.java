@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service.leaveRequest;
+package com.sopheak.istadfinalems.service.impl;
 import com.sopheak.istadfinalems.entities.Employee;
 import com.sopheak.istadfinalems.entities.LeaveRequest;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
@@ -11,7 +11,8 @@ import com.sopheak.istadfinalems.model.dto.leave_request.LeaveRequestResponseDto
 import com.sopheak.istadfinalems.model.dto.leave_request.LeaveRequestUpdateDto;
 import com.sopheak.istadfinalems.repository.EmployeeRepository;
 import com.sopheak.istadfinalems.repository.LeaveRequestRepository;
-import com.sopheak.istadfinalems.service.audit.AuditService;
+import com.sopheak.istadfinalems.service.AuditService;
+import com.sopheak.istadfinalems.service.LeaveRequestService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

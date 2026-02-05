@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service.employeDocument;
+package com.sopheak.istadfinalems.service;
 import com.sopheak.istadfinalems.model.dto.employee_document.EmployeeDocumentCreateDto;
 import com.sopheak.istadfinalems.model.dto.employee_document.EmployeeDocumentResponseDto;
 import com.sopheak.istadfinalems.model.dto.employee_document.EmployeeDocumentUpdateDto;

@@ -1,7 +1,7 @@
 package com.sopheak.istadfinalems.controller;
 import com.sopheak.istadfinalems.model.dto.leave_request.LeaveRequestCreateDto;
 import com.sopheak.istadfinalems.model.dto.leave_request.LeaveRequestUpdateDto;
-import com.sopheak.istadfinalems.service.leaveRequest.LeaveRequestService;
+import com.sopheak.istadfinalems.service.LeaveRequestService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

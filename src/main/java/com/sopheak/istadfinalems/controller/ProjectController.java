@@ -1,7 +1,7 @@
 package com.sopheak.istadfinalems.controller;
 import com.sopheak.istadfinalems.model.dto.project.ProjectCreateDto;
 import com.sopheak.istadfinalems.model.dto.project.ProjectUpdateDto;
-import com.sopheak.istadfinalems.service.project.ProjectService;
+import com.sopheak.istadfinalems.service.ProjectService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

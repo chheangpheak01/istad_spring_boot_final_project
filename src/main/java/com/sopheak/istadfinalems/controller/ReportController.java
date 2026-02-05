@@ -1,6 +1,6 @@
 package com.sopheak.istadfinalems.controller;
 import com.sopheak.istadfinalems.entities.emun.EmployeeStatus;
-import com.sopheak.istadfinalems.service.report.ReportService;
+import com.sopheak.istadfinalems.service.ReportService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;

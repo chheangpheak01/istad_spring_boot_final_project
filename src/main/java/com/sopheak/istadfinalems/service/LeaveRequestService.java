@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service.leaveRequest;
+package com.sopheak.istadfinalems.service;
 import com.sopheak.istadfinalems.model.dto.leave_request.LeaveRequestCreateDto;
 import com.sopheak.istadfinalems.model.dto.leave_request.LeaveRequestResponseDto;
 import com.sopheak.istadfinalems.model.dto.leave_request.LeaveRequestUpdateDto;

@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.service.address;
+package com.sopheak.istadfinalems.service.impl;
 import com.sopheak.istadfinalems.entities.Address;
 import com.sopheak.istadfinalems.entities.emun.AuditAction;
 import com.sopheak.istadfinalems.exception.AddressNotFoundException;
@@ -7,7 +7,8 @@ import com.sopheak.istadfinalems.model.dto.address.AddressCreateDto;
 import com.sopheak.istadfinalems.model.dto.address.AddressResponseDto;
 import com.sopheak.istadfinalems.model.dto.address.AddressUpdateDto;
 import com.sopheak.istadfinalems.repository.AddressRepository;
-import com.sopheak.istadfinalems.service.audit.AuditService;
+import com.sopheak.istadfinalems.service.AuditService;
+import com.sopheak.istadfinalems.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

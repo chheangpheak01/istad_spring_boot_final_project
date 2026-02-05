@@ -1,4 +1,5 @@
-package com.sopheak.istadfinalems.media;
+package com.sopheak.istadfinalems.controller;
+import com.sopheak.istadfinalems.service.FileService;
 import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

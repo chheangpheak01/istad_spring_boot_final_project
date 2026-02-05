@@ -1,4 +1,6 @@
-package com.sopheak.istadfinalems.media;
+package com.sopheak.istadfinalems.service.impl;
+import com.sopheak.istadfinalems.model.dto.media.FileResponseTemplate;
+import com.sopheak.istadfinalems.service.FileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class FileServiceImpl implements FileService{
+public class FileServiceImpl implements FileService {
 
     @Value("${spring.file.upload-location}")
     private String fileUploadLocation;

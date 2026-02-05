@@ -1,4 +1,5 @@
-package com.sopheak.istadfinalems.media;
+package com.sopheak.istadfinalems.service;
+import com.sopheak.istadfinalems.model.dto.media.FileResponseTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
