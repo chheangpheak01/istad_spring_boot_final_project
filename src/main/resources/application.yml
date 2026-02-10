@@ -6,10 +6,10 @@ spring:
       client:
         provider:
           keycloak:
-            jwk-set-uri: http://127.0.0.1:8080/realms/master/protocol/openid-connect/certs
+            jwk-set-uri: http://localhost:8080/realms/springboot/protocol/openid-connect/certs
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/springboot/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8080/realms/springboot
   application:
     name: istad-final-employee-management-system-project
   datasource:
@@ -31,10 +31,7 @@ spring:
     preview-path: localhost:9090/uploads/
     download-path: localhost:9090/
   # keycloak info config
-    keycloak:
-      server-url: http://localhost:8080
-      main-realm: springboot
-      client-id: spring-boot
-      client-secret: KvRNn6h9Ak6AeoSMonjVJi38jZAm0G5l
+
+
 
 
