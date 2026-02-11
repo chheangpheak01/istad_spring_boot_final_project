@@ -31,7 +31,9 @@ spring:
     preview-path: localhost:9090/uploads/
     download-path: localhost:9090/
   # keycloak info config
-
-
-
+  keycloak:
+    server-url: http://localhost:8080
+    main-realm: springboot
+    client-id: spring-boot
+    client-secrete: mjhbQvbo9d0Nzvxsj3XQF8eLZPMoEvre
 

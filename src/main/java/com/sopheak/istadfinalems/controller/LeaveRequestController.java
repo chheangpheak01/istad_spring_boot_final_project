@@ -6,6 +6,8 @@ import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
@@ -13,12 +15,14 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
+@EnableMethodSecurity
 @RequestMapping("/api/v1/leave-requests")
 public class LeaveRequestController {
 
     private final LeaveRequestService leaveRequestService;
 
     @GetMapping("/{uuid}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getLeaveRequestByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -30,6 +34,7 @@ public class LeaveRequestController {
     }
 
     @GetMapping("/pagination")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getAllLeaveRequestByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -42,6 +47,7 @@ public class LeaveRequestController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> createLeaveRequest(@RequestBody @Validated LeaveRequestCreateDto createDto){
         return ResponseTemplate
                 .builder()
@@ -53,6 +59,7 @@ public class LeaveRequestController {
     }
 
     @PutMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> updateLeaveRequestByUuid(@PathVariable String uuid, @RequestBody @Validated LeaveRequestUpdateDto updateDto){
         return ResponseTemplate
                 .builder()
@@ -64,6 +71,7 @@ public class LeaveRequestController {
     }
 
     @DeleteMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> deleteLeaveRequestByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()

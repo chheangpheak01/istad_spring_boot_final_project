@@ -8,6 +8,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,12 +20,14 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
+@EnableMethodSecurity
 @RequestMapping("/api/v1/reports")
 public class ReportController {
 
     private final ReportService reportService;
 
     @GetMapping("/excel")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseEntity<?> downloadEmployeeExcel(
             @RequestParam(required = false) String department,
             @RequestParam(required = false) String title,
@@ -40,6 +44,7 @@ public class ReportController {
     }
 
     @GetMapping("/pdf")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseEntity<?> downloadEmployeePdf(
             @RequestParam(required = false) String department,
             @RequestParam(required = false) String title,
@@ -56,6 +61,7 @@ public class ReportController {
     }
 
     @GetMapping("/csv")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseEntity<?> downloadEmployeeCsv(
             @RequestParam(required = false) String department,
             @RequestParam(required = false) String title,

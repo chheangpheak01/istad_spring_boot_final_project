@@ -2,7 +2,7 @@ package com.sopheak.istadfinalems.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    private final JwtConverterConfigure jwtConverterConfigure;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
             throws Exception{
@@ -22,8 +24,11 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(re->re
-                        .anyRequest().authenticated());
-        httpSecurity.oauth2ResourceServer(jwt-> jwt.jwt(Customizer.withDefaults()));
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .anyRequest().authenticated()
+                );
+        httpSecurity.oauth2ResourceServer(jwt-> jwt.jwt(
+                convert -> convert.jwtAuthenticationConverter(jwtConverterConfigure)));
         return httpSecurity.build();
     }
 }

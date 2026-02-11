@@ -6,6 +6,8 @@ import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
@@ -13,12 +15,14 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
+@EnableMethodSecurity
 @RequestMapping("/api/v1/job-positions")
 public class JobPositionController {
 
     private final JobPositionService jobPositionService;
 
     @GetMapping("/{uuid}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getJobPositionByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -30,6 +34,7 @@ public class JobPositionController {
     }
 
     @GetMapping("/title/{title}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getJobPositionByTitle(@PathVariable String title){
         return ResponseTemplate
                 .builder()
@@ -41,6 +46,7 @@ public class JobPositionController {
     }
 
     @GetMapping("/pagination")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getAllJobPositionByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -53,6 +59,7 @@ public class JobPositionController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> createJobPosition(@RequestBody @Validated JobPositionCreateDto createDto){
         return ResponseTemplate
                 .builder()
@@ -64,6 +71,7 @@ public class JobPositionController {
     }
 
     @PutMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> updateJobPositonByUuid(@PathVariable String uuid, @RequestBody @Validated JobPositionUpdateDto updateDto){
         return ResponseTemplate
                 .builder()
@@ -75,6 +83,7 @@ public class JobPositionController {
     }
 
     @DeleteMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> deleteJobPositionByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()

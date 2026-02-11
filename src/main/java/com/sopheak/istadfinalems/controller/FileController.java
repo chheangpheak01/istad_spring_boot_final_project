@@ -9,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
@@ -19,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@EnableMethodSecurity
 @RequestMapping("api/v1/files")
 public class FileController {
 
@@ -28,6 +31,7 @@ public class FileController {
     private String fileUploadLocation;
 
     @PostMapping("/uploads")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseTemplate<Object> uploadSingleFile(@RequestParam(name = "file") MultipartFile multipartFile){
         return ResponseTemplate
                 .builder()
@@ -39,6 +43,7 @@ public class FileController {
     }
 
     @PostMapping("/upload-multi")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseTemplate<Object> uploadMultipleFiles(@RequestParam(name = "files") List<MultipartFile> multipartFiles){
         return ResponseTemplate
                 .builder()
@@ -50,6 +55,7 @@ public class FileController {
     }
 
     @GetMapping("/download/{filename:.+}")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseEntity<Object> getDownloadFile(@PathVariable(name = "filename") String filename) {
         try {
             Path path = Paths.get(fileUploadLocation).resolve(filename);
@@ -65,6 +71,7 @@ public class FileController {
     }
 
     @GetMapping("/preview/{filename:.+}")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseEntity<Resource> getPreviewFile(@PathVariable String filename) {
         try {
             Path path = Paths.get(fileUploadLocation).resolve(filename);
@@ -81,6 +88,7 @@ public class FileController {
     }
 
     @DeleteMapping("/{filename:.+}")
+    @PreAuthorize("hasRole('user') or hasAnyRole('admin', 'super_admin')")
     public ResponseEntity<ResponseTemplate<Object>> deleteFile(@PathVariable String filename) {
         Boolean isDeleted = fileService.deleteFileByName(filename);
 

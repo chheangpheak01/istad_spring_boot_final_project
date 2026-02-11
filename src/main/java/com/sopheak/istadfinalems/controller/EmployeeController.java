@@ -7,6 +7,8 @@ import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
@@ -14,12 +16,14 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
+@EnableMethodSecurity
 @RequestMapping("/api/v1/employees")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
     @GetMapping("/{uuid}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getEmployeeByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -31,6 +35,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/name/{name}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getEmployeeByName(@PathVariable String name){
         return ResponseTemplate
                 .builder()
@@ -42,6 +47,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/phoneNumber/{phoneNumber}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getEmployeeByPhoneNumber(@PathVariable String phoneNumber){
         return ResponseTemplate
                 .builder()
@@ -53,6 +59,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/pagination")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getAllEmployeesByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -64,6 +71,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/search")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getAllEmployeesBySearchingNamePagination(@RequestParam String searchingName, Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -75,6 +83,7 @@ public class EmployeeController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getAllEmployees(){
         return ResponseTemplate
                 .builder()
@@ -87,6 +96,7 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> createEmployee(@RequestBody @Validated EmployeeCreateDto employeeCreateDto){
         return ResponseTemplate
                 .builder()
@@ -98,6 +108,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> updateEmployeeByUuid(@PathVariable String uuid, @RequestBody @Validated EmployeeUpdateDto employeeUpdateDto){
         return ResponseTemplate
                 .builder()
@@ -109,6 +120,7 @@ public class EmployeeController {
     }
 
     @PatchMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> updateEmployeeStatus(@PathVariable String uuid, @RequestParam String status) {
         EmployeeResponseDto updatedEmployee = employeeService.updateEmployeeStatus(uuid, status);
         return ResponseTemplate
@@ -121,6 +133,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> deleteEmployeeByUuid(@PathVariable String uuid) {
         return ResponseTemplate
                 .builder()

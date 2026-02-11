@@ -48,6 +48,9 @@ dependencies {
     implementation 'com.github.librepdf:openpdf:1.3.30'
     implementation 'com.opencsv:opencsv:5.7.1'
     implementation 'org.keycloak:keycloak-admin-client:26.0.7'
+    // https://mvnrepository.com/artifact/org.keycloak/keycloak-admin-client
+    implementation 'org.keycloak:keycloak-admin-client:26.0.7'
+
 }
 
 tasks.named('test') {

@@ -6,12 +6,15 @@ import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.Date;
 
 @RestController
+@EnableMethodSecurity
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/address")
 public class AddressController {
@@ -19,6 +22,7 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping("/{uuid}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getAddressByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -30,6 +34,7 @@ public class AddressController {
     }
 
     @GetMapping("/pagination")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> getAllAddressByPagination(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -41,6 +46,7 @@ public class AddressController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseTemplate<Object> createAddress(@RequestBody @Validated AddressCreateDto addressCreateDto){
         return ResponseTemplate
@@ -53,6 +59,7 @@ public class AddressController {
     }
 
     @PutMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> updateAddressByUuid(@PathVariable String uuid, @RequestBody @Validated AddressUpdateDto addressUpdateDto){
         return ResponseTemplate
                 .builder()
@@ -64,6 +71,7 @@ public class AddressController {
     }
 
     @DeleteMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> deleteAddressByUuid(@PathVariable String uuid) {
         return ResponseTemplate
                 .builder()

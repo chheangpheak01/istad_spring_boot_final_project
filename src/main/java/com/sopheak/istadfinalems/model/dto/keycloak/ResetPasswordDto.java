@@ -1,4 +1,4 @@
-package com.sopheak.istadfinalems.authService;
+package com.sopheak.istadfinalems.model.dto.keycloak;
 import lombok.Builder;
 
 @Builder

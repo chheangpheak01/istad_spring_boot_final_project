@@ -6,6 +6,8 @@ import com.sopheak.istadfinalems.utils.ResponseTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
@@ -13,12 +15,14 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
+@EnableMethodSecurity
 @RequestMapping("/api/v1/employee-documents")
 public class EmployeeDocumentController {
 
     private final EmployeeDocumentService employeeDocumentService;
 
     @GetMapping("/{uuid}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> findDocumentByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
@@ -30,6 +34,7 @@ public class EmployeeDocumentController {
     }
 
     @GetMapping("/employee/{uuid}")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> findDocumentsByEmployeeUuid(@PathVariable String uuid) {
         return ResponseTemplate.builder()
                 .date(Date.from(Instant.now()))
@@ -40,6 +45,7 @@ public class EmployeeDocumentController {
     }
 
     @GetMapping("/pagination")
+    @PreAuthorize("hasRole('user')")
     public ResponseTemplate<Object> findAllDocuments(Pageable pageable){
         return ResponseTemplate
                 .builder()
@@ -52,6 +58,7 @@ public class EmployeeDocumentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> createDocument(@RequestBody @Validated EmployeeDocumentCreateDto createDto){
         return ResponseTemplate
                 .builder()
@@ -63,6 +70,7 @@ public class EmployeeDocumentController {
     }
 
     @PutMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> updateDocumentByUuid(@PathVariable String uuid, @RequestBody @Validated EmployeeDocumentUpdateDto updateDto){
         return ResponseTemplate
                 .builder()
@@ -74,6 +82,7 @@ public class EmployeeDocumentController {
     }
 
     @DeleteMapping("/{uuid}")
+    @PreAuthorize("hasAnyRole('admin','super_admin')")
     public ResponseTemplate<Object> deleteDocumentByUuid(@PathVariable String uuid){
         return ResponseTemplate
                 .builder()
